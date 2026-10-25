@@ -20,6 +20,11 @@ const PRICERUNNER_PAGES = [
   'https://www.pricerunner.se/pl/1613-3269352781/Robotdammsugare/Roborock-Q-Revo-MaxV-QRMV02-Vit-priser',
 ];
 
+// Roborocks egen butik (Shopify-data), främst för lagerstatus.
+const ROBOROCK_PRODUCTS = [
+  { model: 'master', handle: 'roborock-qrevo-master-set' },
+];
+
 const STORES = [
   { id: 'netonnet', name: 'NetOnNet', url: q => `https://www.netonnet.se/search?query=${q}` },
   { id: 'elgiganten', name: 'Elgiganten', url: q => `https://www.elgiganten.se/search?q=${q}` },
@@ -158,10 +163,42 @@ async function checkStore(ctx, store) {
   };
 }
 
+async function checkRoborock(ctx) {
+  const offers = [];
+  let status = 'ok';
+  for (const p of ROBOROCK_PRODUCTS) {
+    const url = `https://se.roborock.com/products/${p.handle}`;
+    try {
+      const res = await ctx.request.get(`${url}.js`, { timeout: 30000 });
+      if (!res.ok()) { status = `fel (HTTP ${res.status()})`; continue; }
+      const d = await res.json();
+      for (const v of d.variants || []) {
+        const price = v.price / 100;
+        const compareAt = v.compare_at_price ? v.compare_at_price / 100 : null;
+        offers.push({
+          model: p.model,
+          name: `${d.title} (${v.title})`,
+          price,
+          otherPrices: compareAt > price ? [compareAt] : undefined,
+          campaign: compareAt > price,
+          inStock: Boolean(v.available),
+          store: 'Roborock SE',
+          via: 'Roborock SE',
+          url,
+        });
+      }
+    } catch (e) {
+      status = `fel (${e.message.split('\n')[0]})`;
+    }
+  }
+  return { status, offers };
+}
+
+// Bara nya varor i lager räknas. Slutsålda och fyndvaror visas separat.
 function lowest(offers) {
-  const inStock = offers.filter(o => o.inStock !== false && !o.used);
-  const pool = inStock.length ? inStock : offers;
-  return pool.reduce((best, o) => (!best || o.price < best.price ? o : best), null);
+  return offers
+    .filter(o => o.inStock !== false && !o.used)
+    .reduce((best, o) => (!best || o.price < best.price ? o : best), null);
 }
 
 function fmt(n) {
@@ -178,6 +215,9 @@ async function main() {
   const pr = await checkPriceRunner(ctx);
   sources.PriceRunner = pr.status;
   all = all.concat(pr.offers);
+  const rr = await checkRoborock(ctx);
+  sources['Roborock SE'] = rr.status === 'ok' && !rr.offers.length ? 'ok, ingen träff' : rr.status;
+  all = all.concat(rr.offers);
   for (const store of STORES) {
     const r = await checkStore(ctx, store);
     sources[store.name] = r.status === 'ok' && !r.offers.length ? 'ok, ingen träff' : r.status;
@@ -202,17 +242,26 @@ async function main() {
     else if (!before && best && prev) change = 'nytt erbjudande';
     else if (!before && !best && prev) change = 'fortfarande ingen butik';
 
+    const key = o => `${o.store}|${o.name}`;
+    const prevOut = new Set(((prev && prev.models[model.id] && prev.models[model.id].outOfStock) || []).map(key));
+    const outOfStock = offers.filter(o => o.inStock === false);
+    const restocked = offers.filter(o => o.inStock === true && prevOut.has(key(o)));
+
     entry.models[model.id] = {
       lowest: best && { price: best.price, store: best.store, via: best.via, url: best.url },
       change,
       dropped: Boolean(before && best && best.price < before.price),
+      restocked: restocked.length > 0 || Boolean(prev && !before && best),
+      outOfStock: outOfStock.map(o => ({ store: o.store, name: o.name, price: o.price, url: o.url })),
       offers: offers.slice(0, 15),
     };
     lines.push(`${model.label}: ${best ? `${fmt(best.price)} hos ${best.store} (via ${best.via})` : 'ingen butik hittad'} – ${change}`);
+    for (const o of restocked) lines.push(`  ÅTER I LAGER: ${o.name} hos ${o.store}, ${fmt(o.price)}`);
+    for (const o of outOfStock.slice(0, 3)) lines.push(`  slutsåld: ${o.name} hos ${o.store}, ${fmt(o.price)}${o.otherPrices ? ` (ord. ${fmt(o.otherPrices[0])})` : ''}`);
     const used = offers.filter(o => o.used);
     if (used.length) lines.push(`  fyndvara: från ${fmt(used[0].price)} hos ${used[0].store} (${used.length} st)`);
     entry.models[model.id].lowestUsed = used.length ? { price: used[0].price, store: used[0].store, url: used[0].url } : null;
-    const campaigns = offers.filter(o => o.campaign);
+    const campaigns = offers.filter(o => o.campaign && o.inStock !== false);
     for (const c of campaigns.slice(0, 3)) lines.push(`  kampanj? ${c.store}: ${fmt(c.price)} ${c.otherPrices ? `(även ${c.otherPrices.map(fmt).join(', ')})` : ''}`);
   }
   lines.push('Källor: ' + Object.entries(sources).map(([k, v]) => `${k}: ${v}`).join('; '));

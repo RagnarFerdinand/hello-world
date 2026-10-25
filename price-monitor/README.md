@@ -12,6 +12,7 @@ Källor:
 | Källa | Status |
 |---|---|
 | PriceRunner | läses (täcker CDON, Avengo, Buyn m.fl.) |
+| Roborock SE | läses, med lagerstatus (larmar när en slutsåld vara finns i lager igen) |
 | NetOnNet, Power, Webhallen | läses direkt |
 | Elgiganten, Proshop, Amazon.se | blockerar ofta automatiska besök, så de bevakas via websökning efter kampanjer |
 
