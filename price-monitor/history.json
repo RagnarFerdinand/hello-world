@@ -598,5 +598,200 @@
         }
       }
     }
+  },
+  {
+    "checkedAt": "2026-10-26T06:41:12.362Z",
+    "sources": {
+      "PriceRunner": "ok",
+      "Roborock SE": "ok",
+      "NetOnNet": "ok, ingen träff",
+      "Elgiganten": "kunde inte läsas (tom sida/botskydd)",
+      "Power": "ok, ingen träff",
+      "Webhallen": "ok",
+      "Proshop": "blockerad (HTTP 403)",
+      "Amazon.se": "blockerad (HTTP 503)"
+    },
+    "models": {
+      "master": {
+        "lowest": null,
+        "change": "fortfarande ingen butik",
+        "dropped": false,
+        "restocked": false,
+        "outOfStock": [
+          {
+            "store": "Roborock SE",
+            "name": "Roborock Qrevo Master robotdammsugare-set med multifunktionell dockningsstation 3.0 (Svart)",
+            "price": 5980,
+            "url": "https://se.roborock.com/products/roborock-qrevo-master-set"
+          },
+          {
+            "store": "Roborock SE",
+            "name": "Roborock Qrevo Master robotdammsugare-set med multifunktionell dockningsstation 3.0 (Vit)",
+            "price": 5980,
+            "url": "https://se.roborock.com/products/roborock-qrevo-master-set"
+          }
+        ],
+        "offers": [
+          {
+            "model": "master",
+            "name": "Roborock Qrevo Master robotdammsugare-set med multifunktionell dockningsstation 3.0 (Svart)",
+            "price": 5980,
+            "otherPrices": [
+              9589
+            ],
+            "campaign": true,
+            "inStock": false,
+            "store": "Roborock SE",
+            "via": "Roborock SE",
+            "url": "https://se.roborock.com/products/roborock-qrevo-master-set"
+          },
+          {
+            "model": "master",
+            "name": "Roborock Qrevo Master robotdammsugare-set med multifunktionell dockningsstation 3.0 (Vit)",
+            "price": 5980,
+            "otherPrices": [
+              9589
+            ],
+            "campaign": true,
+            "inStock": false,
+            "store": "Roborock SE",
+            "via": "Roborock SE",
+            "url": "https://se.roborock.com/products/roborock-qrevo-master-set"
+          }
+        ],
+        "lowestUsed": null
+      },
+      "maxv": {
+        "lowest": {
+          "price": 6487,
+          "store": "Avengo",
+          "via": "PriceRunner",
+          "url": "https://www.pricerunner.se/pl/1613-3269352781/Robotdammsugare/Roborock-Q-Revo-MaxV-QRMV02-Vit-priser"
+        },
+        "change": "oförändrat",
+        "dropped": false,
+        "restocked": false,
+        "outOfStock": [],
+        "offers": [
+          {
+            "model": "maxv",
+            "name": "Roborock Qrevo MaxV QRMV02 Vit",
+            "price": 6487,
+            "store": "Avengo",
+            "inStock": true,
+            "via": "PriceRunner",
+            "url": "https://www.pricerunner.se/pl/1613-3269352781/Robotdammsugare/Roborock-Q-Revo-MaxV-QRMV02-Vit-priser"
+          },
+          {
+            "model": "maxv",
+            "name": "Roborock Qrevo MaxV QRMV02 Vit",
+            "price": 6488,
+            "store": "CS MEGASTORE",
+            "inStock": true,
+            "via": "PriceRunner",
+            "url": "https://www.pricerunner.se/pl/1613-3269352781/Robotdammsugare/Roborock-Q-Revo-MaxV-QRMV02-Vit-priser"
+          },
+          {
+            "model": "maxv",
+            "name": "Roborock Qrevo MaxV QRMV02 Vit",
+            "price": 6488,
+            "store": "CDON",
+            "inStock": true,
+            "via": "PriceRunner",
+            "url": "https://www.pricerunner.se/pl/1613-3269352781/Robotdammsugare/Roborock-Q-Revo-MaxV-QRMV02-Vit-priser"
+          },
+          {
+            "model": "maxv",
+            "name": "Roborock Qrevo MaxV QRMV02 Vit",
+            "price": 6490,
+            "store": "Buyn",
+            "inStock": true,
+            "via": "PriceRunner",
+            "url": "https://www.pricerunner.se/pl/1613-3269352781/Robotdammsugare/Roborock-Q-Revo-MaxV-QRMV02-Vit-priser"
+          },
+          {
+            "model": "maxv",
+            "name": "Roborock Qrevo MaxV QRMV02 Vit",
+            "price": 6749,
+            "store": "Buyersclub",
+            "inStock": true,
+            "via": "PriceRunner",
+            "url": "https://www.pricerunner.se/pl/1613-3269352781/Robotdammsugare/Roborock-Q-Revo-MaxV-QRMV02-Vit-priser"
+          },
+          {
+            "model": "maxv",
+            "name": "Roborock Qrevo MaxV QRMV02 Vit",
+            "price": 6988,
+            "store": "mobilmarket.se",
+            "inStock": true,
+            "via": "PriceRunner",
+            "url": "https://www.pricerunner.se/pl/1613-3269352781/Robotdammsugare/Roborock-Q-Revo-MaxV-QRMV02-Vit-priser"
+          },
+          {
+            "model": "maxv",
+            "name": "Roborock Qrevo MaxV Black (Fyndvara klass 3)",
+            "price": 6990,
+            "campaign": false,
+            "used": true,
+            "store": "Webhallen",
+            "via": "Webhallen",
+            "url": "https://www.webhallen.com/se/product/387782-Roborock-Qrevo-MaxV-Black-Fyndvara-klass-3"
+          },
+          {
+            "model": "maxv",
+            "name": "Roborock Qrevo MaxV QRMV02 Vit",
+            "price": 7234,
+            "store": "CDON",
+            "inStock": true,
+            "via": "PriceRunner",
+            "url": "https://www.pricerunner.se/pl/1613-3269352781/Robotdammsugare/Roborock-Q-Revo-MaxV-QRMV02-Vit-priser"
+          },
+          {
+            "model": "maxv",
+            "name": "Roborock Qrevo MaxV Black (Fyndvara klass 2)",
+            "price": 7490,
+            "campaign": false,
+            "used": true,
+            "store": "Webhallen",
+            "via": "Webhallen",
+            "url": "https://www.webhallen.com/se/product/385796-Roborock-Qrevo-MaxV-Black-Fyndvara-klass-2"
+          },
+          {
+            "model": "maxv",
+            "name": "Roborock Qrevo MaxV White (Fyndvara klass 2)",
+            "price": 7490,
+            "campaign": false,
+            "used": true,
+            "store": "Webhallen",
+            "via": "Webhallen",
+            "url": "https://www.webhallen.com/se/product/386198-Roborock-Qrevo-MaxV-White-Fyndvara-klass-2"
+          },
+          {
+            "model": "maxv",
+            "name": "Roborock Qrevo MaxV Black (Fyndvara klass 1)",
+            "price": 7890,
+            "campaign": false,
+            "used": true,
+            "store": "Webhallen",
+            "via": "Webhallen",
+            "url": "https://www.webhallen.com/se/product/381017-Roborock-Qrevo-MaxV-Black-Fyndvara-klass-1"
+          },
+          {
+            "model": "maxv",
+            "name": "Roborock Qrevo MaxV QRMV02 Vit",
+            "price": 8107,
+            "store": "CDON",
+            "inStock": true,
+            "via": "PriceRunner",
+            "url": "https://www.pricerunner.se/pl/1613-3269352781/Robotdammsugare/Roborock-Q-Revo-MaxV-QRMV02-Vit-priser"
+          }
+        ],
+        "lowestUsed": {
+          "price": 6990,
+          "store": "Webhallen",
+          "url": "https://www.webhallen.com/se/product/387782-Roborock-Qrevo-MaxV-Black-Fyndvara-klass-3"
+        }
+      }
+    }
   }
 ]
